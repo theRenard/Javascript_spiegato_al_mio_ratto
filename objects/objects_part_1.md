@@ -69,4 +69,4 @@ next : references and primitives
 
 [1]: (https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object)
 
-[2]: (objects_part_2)
+[2]: ./objects_part_2.md
