@@ -54,12 +54,15 @@ player['getsOneLife'] = function() {
 Dot notation is maybe easier to read but with bracket notation you can get/set keys dynamically:
 
 ```javascript
-	// dot
-	player.property_1.property_2.method().value;
+// dot
+player.property_1.property_2.method().value;
 	
-	// brackets
-	var dynamicValue = 'name';
-	player[dynamicValue] = 'Player 1';
+// brackets
+var dynamicValue = 'name';
+player[dynamicValue] = 'Player 1';
 ```
+
+next : object initializer es2015
+next : references and primitives
 
 [1]: (https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object)
