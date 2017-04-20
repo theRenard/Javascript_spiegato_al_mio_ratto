@@ -1,51 +1,65 @@
-## Welcome to GitHub Pages
+## Objects
+### Press start to play 🎮
 
-You can use the [editor on GitHub](https://github.com/leRenart/js-with-mario-and-luigi/edit/master/index.md) to maintain and preview the content for your website in Markdown files.
+What is an Object[*][1] ?
 
-[Objects](./objects.md)
+*An object is an unordered collection of primitive or reference data types (properties) and functionality (methods) that is stored as a series of name-value pairs.*
 
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
+Let's say we are going to play a new game. 
+We can use an object to set a new player.
 
-### Markdown
-
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
-![logo](./images/mario-and-luigi-clip-art-pictures-KHxtf8-clipart.jpeg)
-
-	
 ```javascript
-var a = 'test';
+var player = {};
+```
+Or we can set an object with some properties and methods like the number of lives and a death method.
 
-function fancyAlert(arg) {
-  if(arg) {
-    $.facebox({div:'#foo'})
-  }
+```javascript
+var player = {
+
+	// a property
+	lives: 3,
+
+	// a method, 'this' is the object itself
+	losesOneLife: function() {
+		this.lives -= 1;
+	}	
 }
+
+```
+We can **get** its methods and properties like that:
+
+```javascript
+// dot notation
+console.log( player.lives ); // 3
+
+player.losesOneLife();
+
+// bracket notation
+console.log( player['lives'] ); // now 2
+
+```
+And of course we can **set** new properties/methods in the very same way.
+
+```javascript
+// redefine an existing property
+player.name = 'Player 1';
+
+// and a brand new method
+player['getsOneLife'] = function() {
+	this.lives += 1;
+}
+
 ```
 
-```markdown
-Syntax highlighted code block
+Dot notation is maybe easier to read but with bracket notation you can get/set keys dynamically:
 
-# Header 1
-## Header 2
-### Header 3
-
-- Bulleted
-- List
-
-1. Numbered
-2. List
-
-**Bold** and _Italic_ and `Code` text
-
-[Link](url) and ![Image](src)
+```javascript
+	// dot
+	player.property_1.property_2.method().value;
+	
+	// brackets
+	var dynamicValue = 'name';
+	player[dynamicValue] = 'Player 1';
 ```
 
-For more details see [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/).
-
-### Jekyll Themes
-
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/leRenart/js-with-mario-and-luigi/settings). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
-
-### Support or Contact
-
-Having trouble with Pages? Check out our [documentation](https://help.github.com/categories/github-pages-basics/) or [contact support](https://github.com/contact) and we’ll help you sort it out.
+[1]: (https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object)
