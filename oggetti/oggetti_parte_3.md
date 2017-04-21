@@ -15,7 +15,9 @@ var felino = {
 }
 ```
 
-Ogni oggetto in javascript ha un link al prototipo che lo ha creato e così Gatto, ora tu hai un link con il felino.
+Ogni oggetto in javascript ha un proprietà <sup>[(MDN)][Object.prototype]</sup> speciale che la lega all'oggetto che lo ha creato. 
+
+Così Gatto, ora tu hai un link con il felino <sup>[(MDN)][Object.create]</sup>.
 
 ```javascript
 var gatto = Object.create(felino);
@@ -30,7 +32,7 @@ gatto.fusa(); // RonRooooon
 
 ```
 
-Avrai già intuito Gatto che la ricerca di una tua proprietà o metodo ripercorre tutta la catena dei prototipi fino ad arrivare all'oggetto principale (che si chiama Object <sup>[(MDN)][object]</sup>)
+Avrai già intuito Gatto che la ricerca di una tua proprietà o metodo ripercorre tutta la catena dei prototipi fino ad arrivare all'oggetto principale (che si chiama Object <sup>[(MDN)][Object]</sup>)
 
 Fortunatamente ogni tua proprietà può essere riscritta, magari hai perso la coda anni fa...
 
@@ -43,4 +45,8 @@ console.log(gatto.coda); // false
 
 [1]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Inheritance_and_the_prototype_chain
 
-[object]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object
+[Object.prototype]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/prototype
+
+[Object.create]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/create
+
+[Object]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object
