@@ -1,5 +1,6 @@
-## Gli oggetti
-### ⚽️
+# Gli oggetti
+
+<hr>
 
 Caro gatto, Javascript è un linguaggio ad oggetti, gli oggetti li userai spesso, sempre. Questo corso inizia facile, spiegando cosa è un oggetto <sup>[(MDN)][1]</sup>.
 
@@ -68,8 +69,9 @@ var valoreDinamico = 'nome';
 gatto[valoreDinamico] = 'Dorakiki';
 ```
 
-[Oggetti parte 2, cosa succede nel 2015 ?][2]
-[Oggetti parte 3, una ricca eredità][3]
+1. [Oggetti parte 2, Come si crea un oggetto ?][2]
+2. [Oggetti parte 3, cosa succede nel 2015 ?][2]
+3. [Oggetti parte 4, una ricca eredità][3]
 
 
 [1]: (https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object)
