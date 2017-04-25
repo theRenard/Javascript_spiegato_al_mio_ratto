@@ -1,10 +1,12 @@
-# Gli oggetti
+# Chiodi e martello
+
+#### Ovvero, come creare, modificare, smontare gli oggetti.
 
 <hr>
 
-Caro Gatto, ora che sappiamo cosa è un oggetto, proviamo a crearne uno insieme. 
+Gatto, ora che sappiamo cosa è un oggetto, proviamo a crearne uno insieme. 
 
-Esistono vari modi (patterns). Questi sono quelli più utilizzati.
+Esistono vari modi per costruire un oggetto e questi modi si chiamano **patterns**. Questi patterns sono quelli più utilizzati.
 
 ##### con un Oggetto Letterale
 ```javascript
@@ -57,14 +59,11 @@ var gatto = new Gatto("Dorakiki");
 
 ```
 
+Tutto chiaro fin qui ? Passiamo alla parte 4, ovvero "[parte 4][4]".
 
-Practical Patterns for Creating Objects
+[Object]: (https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object)
 
-Constructor Pattern for Creating Objects
-
-Prototype Pattern for Creating Objects
-
-Accessing and Enumerating Properties on Objects
-
-Deleting Properties of an Object 
+[index]: ../index.md
+[4]: ./oggetti_parte_3.md
+ 
 [new]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/new

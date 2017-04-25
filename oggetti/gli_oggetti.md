@@ -1,12 +1,17 @@
 # Gli oggetti
 
+#### Ovvero, che diamine è un oggetto?
 <hr>
 
-Caro gatto, Javascript è un linguaggio ad oggetti, gli oggetti li userai spesso, sempre. Questo corso inizia facile, spiegando cosa è un oggetto <sup>[(MDN)][1]</sup>.
+Caro gatto, Javascript è un linguaggio ad oggetti, gli oggetti li userai spesso, sempre. Questo corso inizia facile, spiegando cosa è un oggetto <sup>[(MDN)][Object]</sup>.
 
 Un oggetto è una collezione non ordinata di dati (proprietà) e funzioni (metodi) definiti come coppie nome **nome** e **valore**. 
 
-Per farla semplice, facciamo che tu sei un oggetto. Si lo so, non è bello da dire, sei un animale, ma facciamo che per descriverti usiamo un oggetto.
+```javascript
+{ nome: 'valore' };  // eccomi, sono un oggetto.
+```
+
+Per farla semplice, facciamo che tu sei un oggetto. Non è bello da dire, sei un animale, ma facciamo che per descriverti usiamo un oggetto, e per comodità assegnamo a questo oggetto una variabile `gatto`.
 
 ```javascript
 var gatto = {};
@@ -30,7 +35,7 @@ var gatto = {
 
 ```
 
-Per accedere ai tuoi metodi e alle tue proprietà, [**get**] puoi utilizzare il punto o la parentesi quadra.
+Per accedere ai tuoi metodi e alle tue proprietà, (**get**) puoi utilizzare il punto o la parentesi quadra.
 
 ```javascript
 // con il punto, detto anche dot notation
@@ -42,7 +47,7 @@ gatto.muore();  // avvelenato ?
 console.log( gatto['vite'] ); // 8
 
 ```
-E con lo stesso sistema caro Gatto, puoi aggiungere nuove proprietà e nuovi metodi. 
+E con lo stesso sistema caro Gatto, puoi aggiungere nuove proprietà e nuovi metodi (**set**). 
 
 ```javascript
 // ecco una nuova proprietà
@@ -53,12 +58,12 @@ gatto.vite = 5;
 
 // e un nuovo medoto
 gatto['rivive'] = function() {
-	this.vite += 1; // che può tornarti tanto, tanto utile.
+	this.vite += 1; // molto utile.
 }
 
 ```
 
-A mio modesto parere la *dot notation* è più semplice da leggere, ma con le parentesi quadre puoi usare una variabile per recuperare un valore, cosa pratica, credimi.
+La *dot notation* è probabilmente più semplice da leggere, ma con le parentesi quadre puoi usare una variabile per recuperare un valore, cosa piuttosto pratica.
 
 ```javascript
 // carino no?
@@ -69,12 +74,10 @@ var valoreDinamico = 'nome';
 gatto[valoreDinamico] = 'Dorakiki';
 ```
 
-1. [Oggetti parte 2, Come si crea un oggetto ?][2]
-2. [Oggetti parte 3, cosa succede nel 2015 ?][2]
-3. [Oggetti parte 4, una ricca eredità][3]
+Tutto chiaro fin qui ? Passiamo alla parte 2, ovvero "[Una ricca eredità][2]".
 
 
-[1]: (https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object)
+[Object]: (https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object)
 
-[2]: ./oggetti_parte_2.md
-[3]: ./oggetti_parte_3.md
+[index]: ../index.md
+[2]: ./una_ricca_eredita.md
