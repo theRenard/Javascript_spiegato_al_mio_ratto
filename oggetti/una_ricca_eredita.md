@@ -31,11 +31,11 @@ gatto.fusa(); // RonRooooon
 
 Ma come funziona questa MAGIA ?
 
-Ogni oggetto in javascript ha un proprietà speciale, che tra l'altro è un oggetto a sua volta, (ma guarda un po'), che si chiama `.prototype`<sup>[(MDN)][Object.prototype]</sup> ed è straordinariamente importante perché è da `.prototype` che il nostro oggetto prende tutte le sue proprietà.
+Ogni oggetto in javascript ha un proprietà speciale, che tra l'altro è un oggetto a sua volta, (ma guarda un po'), che si chiama `[[prototype]]`<sup>[(MDN)][Object.prototype]</sup> ed è straordinariamente importante perché è da `[[prototype]]` che il nostro oggetto prende tutte le sue proprietà.
 
-Quando cerchiamo una proprietà o metodo in un oggetto, javascript fa un tentativo per vedere se questo è presente nell'oggetto stesso, e se non lo trova usa `prototype` per percorrere a ritroso la catena di prototipi, fino ad arrivare al generatore di tutti gli oggetti, che nella fattispecie si chiama, rullo di tamburi, Object <sup>[(MDN)][Object]</sup>.
+Quando cerchiamo una proprietà o metodo in un oggetto, javascript fa un tentativo per vedere se questo è presente nell'oggetto stesso, e se non lo trova usa `[[prototype]]` per percorrere a ritroso la catena di prototipi, fino ad arrivare al generatore di tutti gli oggetti, che nella fattispecie si chiama, rullo di tamburi, Object <sup>[(MDN)][Object]</sup>.
 
-Per accertare la relazione proviamo ad usare la proprietà `__proto__`<sup>[(MDN)][__proto__]</sup> di gatto. `__proto__` è una proprietà che permette di accedere al prototipo di un oggetto.
+Avrai notato che `[[prototype]]` ha due parentesi quadre. È una convenzione per dire che questa proprietà non è accessibile in alcun modo, è nascosta. Esiste però un modo di accedere al prototipo di un oggetto, si può usare la proprietà `__proto__`<sup>[(MDN)][__proto__]</sup>. E infatti se proviamo ad accedere all proto-proprietà di gatto abbiamo:
 
 ```javascript
 console.log(gatto.__proto__); // {coda: true, fusa: function}

@@ -42,7 +42,7 @@ var gatto = new Gatto();
 
 Se sei curioso di saperere cosa fa l'operatore **new** <sup>[(MDN)][new]</sup> sappi che new usa un suo metodo "Constructor" e che:
 
-1. Crea un nuovo oggetto che eredita da Gatto.prototype
+1. Crea un nuovo oggetto che eredita da Gatto.[[prototype]]
 2. Esegue la funzione Gatto assegnando `this` al nuovo oggetto (e passando dei parametri, se ci sono, ad esempio il nome 'Dorakiki')
 3. Restituisce l'oggetto al punto 1
 
