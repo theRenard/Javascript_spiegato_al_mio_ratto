@@ -1,6 +1,7 @@
-# Questo quello e quell'altro
+# Questo codesto e quello
 
 #### dove si scopre come si utilizza `this`
+
 <hr>
 
 Caro Gatto, in uno degli esempi precedenti avevamo creato un oggetto con una proprietà ed un metodo, arieccolo:
@@ -15,9 +16,9 @@ var gatto = {
 
 ```
 
-`this.vite` in questo caso corrisponde quindi a `gatto.vite`, sembra abbastanza intuitivo, ma cosa è davvero `this`?
+`this.vite` in questo caso corrisponde quindi a `gatto.vite`, sembra abbastanza intuitivo, ma a cosa corrisponde davvero `this`?
 
-Possiamo pensare a `this` come se fosse il pronome `questo`.
+Un modo facile è pensare a `this` come se fosse il pronome `questo`.
 
 Il `gatto` è un oggetto e `questo` ha 9 `vite` e quando `questo` `muore()` `questo` perde una vita. 
 
@@ -133,7 +134,7 @@ console.log(cane); // {nome: "fido", razza: "husky", colore: "grigio"}
 
 ```
 
-`bind()` fa qualcosa di simile a `call()` e `apply()`, ma mentre questi due eseguono le funzioni immediatamente, `bind()` restiuisce una funzione che può essere chiamata in un secondo momento. 
+`bind()` fa qualcosa di simile a `call()` e `apply()`, ma mentre questi due eseguono le funzioni immediatamente, `bind()` restiuisce una funzione che dovrà essere eseguita in un secondo momento.
 
 
 ```javascript
@@ -144,9 +145,6 @@ creaUnCane();
 console.log(cane); // {nome: "fido", razza: "husky", colore: "grigio"}
 
 ```
-
-
-differenza con bind(), dove call e apply invocano la funzione immediatamente, mentre bind restituisce una funzione che se eseguita più tardi avrà un suo contesto già settato
 
 
 [this]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/this
