@@ -24,6 +24,8 @@ In javascript le variabili dichiarate nello *scope* di una funzione sono accessi
 
 Una **chiusura** è dunque una funzione che utilizza le variabili definite nello spazio nel quale è stata creata.
 
+Meno chiacchiere, più esempi.
+
 Per prima cosa cosa creiamo una funzione `creaCroccantini()`. Al suo interno definiamo una variabile `croccantini`, inizialmente uguale a `0`.
 
 All'interno di questa prima funzione ne creiamo un'altra, la chiamiamo `aggiungiUnCroccantino()`. Il suo scopo è solo di aggiungere una unità a `croccantini`, variabile a cui ha accesso grazie al fatto di essere creata nello stesso *scope*. 
@@ -46,7 +48,7 @@ function creaCroccantini() {
 
 ```
 
-`creaCroccantini()` restituisce la funzione `aggiungiUnCroccantino()` in questo modo possiamo eseguirla quando serve. Ed è quello che facciamo qui in basso. Assegniamo una nuova variabile `dammiUnCroccantino` al valore restituito da `creaCroccantini()` che è la funzione `aggiungiUnCroccantino()`.
+`creaCroccantini()`, quando eseguita, restituisce la funzione `aggiungiUnCroccantino()` in questo modo possiamo eseguirla quando serve. Ed è quello che facciamo qui in basso. 
 
 
 ```javascript
