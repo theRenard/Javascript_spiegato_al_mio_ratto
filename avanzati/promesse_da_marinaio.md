@@ -4,7 +4,7 @@
 
 <hr>
 
-Prima di parlare però delle promesse tocca rivedere un concetto chiave di javascript ovvero l'asincronicità. 
+Prima di parlare però delle promesse tocca rivedere un concetto importante ovvero l'asincronicità. 
 
 Sincronicità in javascript è del tipo: 
 
@@ -42,19 +42,21 @@ new Promise( /* executor */ function(resolve, reject) { ... } );
 
 ```
 
-Ogni promessa ha una proprietà interna `[[PromiseStatus]]` che avere tre valori:  
+Ogni promessa ha una proprietà interna `[[PromiseStatus]]` che può avere tre valori:  
 
-1. `"pending"` (default)
+1. `"pending"` (di default)
 2. `"fulfilled"`
 3. `"rejected"`
 
-Nel momento in cui la promessa viene eseguita essa si trova in uno stato di attesa `"pending"`, in seguito a questa attesa lo stato può cambiare in `"fulfilled"` o `"rejected"`. E quando il valore cambia, si attiva la coda di esecuzione dei suoi metodi `then()` e/o `catch()`. 
+Nel momento in cui la promessa viene eseguita essa si trova in uno stato di attesa `"pending"`. 
+
+In seguito a questa attesa lo stato può cambiare in `"fulfilled"` o `"rejected"` e quando questo valore cambia, si attiva la coda di esecuzione dei suoi metodi `then()` e/o `catch()`.
 
 Daglie con l'esempio pratico!
 
 Diciamo che siamo Schroedinger, e che infiliamo un gatto qualunque in una scatola d'acciaio e che dopo cinque secondi andiamo a vedere se è vivo o morto.
 
-La `scatola` è sarà quindi la nostra promessa. Le due funzioni *vivo* e *morto* saranno *resolve* e *reject*. 
+La `scatola` è quindi la nostra promessa. Le due funzioni *vivo* e *morto* saranno *resolve* e *reject*. 
 
 ```javascript
 var scatola = new Promise((vivo, morto) => {});
@@ -84,9 +86,11 @@ scatola.then((msg) => {
 ```
 Dopo 5 secondi la funzione `vivo()` della promessa `scatola` cambierà il proprio stato in `"fulfilled"`, e attiverà così il metodo `then`. 
 
-La cosa pratica è che `then()` e `catch()` restituiscono entrambi delle promesse quindi i metodi li puoi *incatenare*
+La cosa pratica è che `then()` e `catch()` restituiscono entrambi delle promesse quindi i metodi si possono *incatenare*
 
-Facciamo l'esempio del gatto morto 😿. Visto che la promessa è ora `"rejected"` il metodo `then()` non sarà mai eseguito. 
+Facciamo ora l'esempio del gatto morto 😿. 
+
+Visto che la promessa è ora `"rejected"` solo il metodo `catch()` sarà eseguito. 
 
 ```javascript
 var scatola = new Promise((vivo, morto) => {
@@ -108,30 +112,19 @@ scatola
 
 ```
 
-
-
+Per dirla tutta `then()` accetta due callback. Il secondo risponde allo stato `"rejected"` come `catch()`.
 
 ```javascript
-var gatto = function () {
-    return new Promise((resolve, reject) => {
-        resolve('ciao!')
-    });
-};
 
-setInterval(() => {
-
-    gatto()
-        .then((risposta) => {
-            console.log(risposta);
-        })
-        .catch((risposta) => {
-            console.log('errore: ' + risposta);
-        });
-
-}, 3000);
+scatola
+  .then(
+  	(msg) => {
+    	console.log(msg); // mai eseguita
+  	},
+  	(msg) => {
+    	console.log(msg); // dopo 5 secondi 'il gatto è morto!'
+  });
 
 ```
-
-
 [Promise]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise
 
