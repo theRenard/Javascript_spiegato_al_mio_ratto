@@ -1,79 +1,137 @@
-# Le Chiusure
+# Promesse da marinaio
 
-#### Ovvero dove si comprende che se una porta è chiusa si può passare dalla finestra 🚪
+#### Dove si capisce che una volta che hai fatto una promessa questa va mantenuta. O anche no.
+
 <hr>
 
-<sup>[(MDN)][Object]</sup>.
+Prima di parlare però delle promesse tocca rivedere un concetto chiave di javascript ovvero l'asincronicità. 
 
-Il concetto di **closures** è strettamente legato alla portata delle variabili. È un concetto semplice, che si spiega ancora più facilmente con un esempio.
+Sincronicità in javascript è del tipo: 
 
-```javascript
-var gatto = { nome : 'Dorakiki' };
-
-function nomeGatto() {
-	console.log(gatto.nome);
-}
-
-nomeGatto(); // Giuliano
+```
+esegui A;
+esegui B;
+esegui C;
 
 ```
 
-la variabile `gatto` è dichiarata al di fuori della funzione `nomeGatto` ma questo non impedisce a quest'ultima di accedervi. 
+Asincronicità è piuttosto: 
 
-In javascript le variabili dichiarate nello *scope* di una funzione sono accessibili da tutte le funzioni create nello stesso spazio.
-
-Una **chiusura** è dunque una funzione che utilizza le variabili definite nello spazio nel quale è stata creata.
-
-Meno chiacchiere, più esempi.
-
-Per prima cosa cosa creiamo una funzione `creaCroccantini()`. Al suo interno definiamo una variabile `croccantini`, inizialmente uguale a `0`.
-
-All'interno di questa prima funzione ne creiamo un'altra, la chiamiamo `aggiungiUnCroccantino()`. Il suo scopo è solo di aggiungere una unità a `croccantini`, variabile a cui ha accesso grazie al fatto di essere creata nello stesso *scope*. 
- 
-
-```javascript
-function creaCroccantini() {
-
-	var croccantini = 0;
-	
-	function aggiungiUnCroccantino() {
-	
-		croccantini++;
-		console.log(croccantini);
-	
-	}
-
-	return aggiungiUnCroccantino;
-}
+```
+esegui A;
+collegati col server Z e recupera i dati;
+	quindi esegui B;
+esegui C;
+collegati col server Y e recupera i dati;
+	quindi esegui A 
+		quindi esegui una operazione complicatissima;
+			quindi esegui B;
 
 ```
 
-`creaCroccantini()`, quando eseguita, restituisce la funzione `aggiungiUnCroccantino()` in questo modo possiamo eseguirla quando serve. Ed è quello che facciamo qui in basso. 
+Va da sé che questi processi non sono eseguiti uno appresso all'altro, prima di eseguire B tocca collegarsi col server, aspettare la risposta, ricevere la risposta, elaborarla, e quant'altro. 
 
+Per aiutarci in questo ingrato compito, possiamo usare le famose, rullo di tamburi, **promesse** <sup>[(MDN)][Promise]</sup>.
+
+La **promessa** in javascript è un *oggetto* utilizzato nelle computazioni asincrone, rappresenta un valore che sarà disponibile *subito*, oppure *nel futuro*, oppure *mai*.
+
+Questa è la sua sintassi.
 
 ```javascript
-var dammiUnCroccantino = creaCroccantini();
+new Promise( /* executor */ function(resolve, reject) { ... } );
 
 ```
 
-`dammiUnCroccantino` è una **chiusura**, essa ha accesso alla variabile `croccantini` anche se la funzione `creaCroccantini()` è già stata eseguita da un bel pezzo. So che può sembrare non intuitivo, in fin dei conti quella variabile era stata creata altrove, ma queste sono le magie di javascript. 
+Ogni promessa ha una proprietà interna `[[PromiseStatus]]` che avere tre valori:  
 
-La **chiusura** ha la memoria lunga, e si ricorda, e utilizza tutte le variabili del suo *scope*.
+1. `"pending"` (default)
+2. `"fulfilled"`
+3. `"rejected"`
 
-La prova ?
+Nel momento in cui la promessa viene eseguita essa si trova in uno stato di attesa `"pending"`, in seguito a questa attesa lo stato può cambiare in `"fulfilled"` o `"rejected"`. E quando il valore cambia, si attiva la coda di esecuzione dei suoi metodi `then()` e/o `catch()`. 
+
+Daglie con l'esempio pratico!
+
+Diciamo che siamo Schroedinger, e che infiliamo un gatto qualunque in una scatola d'acciaio e che dopo cinque secondi andiamo a vedere se è vivo o morto.
+
+La `scatola` è sarà quindi la nostra promessa. Le due funzioni *vivo* e *morto* saranno *resolve* e *reject*. 
 
 ```javascript
-dammiUnCroccantino(); // 1
-dammiUnCroccantino(); // 2
-dammiUnCroccantino(); // 3
-dammiUnCroccantino(); // 4
+var scatola = new Promise((vivo, morto) => {});
+```
+
+Per farla semplice per simulare una operazione straordinariamente lunga mettiamo un timeout di 5 secondi e sepre per comodità per ora il gatto è sempre vivo quindi la promessa, sarà sempre `"fulfilled"` 😸.
+
+```javascript
+var scatola = new Promise((vivo, morto) => {
+
+  setTimeout(() => {
+    vivo('il gatto è vivo!');
+  }, 5000);
+
+});
+```
+
+Nota bene, `vivo()` ha come **payload** una stringa ma potrebbe essere un oggetto, una funzione quello che te pare.
+
+Ora, visto che `scatola` è una instanza di `Promise()` questa si porta appresso due metodi: `then()` e `catch()`. 
+
+```javascript
+scatola.then((msg) => {
+    console.log(msg);  // dopo 5 secondi 'il gatto è vivo!'
+});
+
+```
+Dopo 5 secondi la funzione `vivo()` della promessa `scatola` cambierà il proprio stato in `"fulfilled"`, e attiverà così il metodo `then`. 
+
+La cosa pratica è che `then()` e `catch()` restituiscono entrambi delle promesse quindi i metodi li puoi *incatenare*
+
+Facciamo l'esempio del gatto morto 😿. Visto che la promessa è ora `"rejected"` il metodo `then()` non sarà mai eseguito. 
+
+```javascript
+var scatola = new Promise((vivo, morto) => {
+
+  setTimeout(() => {
+    morto('il gatto è morto!');
+  }, 5000);
+
+});
+
+scatola
+  .then((msg) => {
+    console.log(msg); // mai eseguita
+  })
+  .catch((msg) => {
+    console.log(msg); // dopo 5 secondi 'il gatto è morto!'
+
+  });
+
 ```
 
 
 
-[Object]: (https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object)
+
+```javascript
+var gatto = function () {
+    return new Promise((resolve, reject) => {
+        resolve('ciao!')
+    });
+};
+
+setInterval(() => {
+
+    gatto()
+        .then((risposta) => {
+            console.log(risposta);
+        })
+        .catch((risposta) => {
+            console.log('errore: ' + risposta);
+        });
+
+}, 3000);
+
+```
 
 
+[Promise]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise
 
-[index]: ../index.md
-[2]: ./proprieta_privata.md

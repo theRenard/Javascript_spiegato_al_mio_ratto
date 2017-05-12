@@ -9,7 +9,6 @@
 3. Oggetti
 4. Ereditarietà
 5. Costruttori e patterns
-6. 
 6. DOM
 7. Eventi
 8. Ajax
