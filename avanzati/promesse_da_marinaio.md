@@ -124,6 +124,8 @@ scatola
   	(msg) => {
     	console.log(msg); // dopo 5 secondi 'il gatto è morto!'
   });
+  
+Promise.all() and race()
 
 ```
 [Promise]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise
